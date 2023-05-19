@@ -1,4 +1,3 @@
-
 import Notiflix from 'notiflix';
 
 const form = document.querySelector('.form');
@@ -20,16 +19,17 @@ async function createPromise(position, delay) {
     throw error;
   }
 }
-
 form.addEventListener('submit', async event => {
   event.preventDefault();
   const delay = Number(event.target.elements.delay.value);
   const step = Number(event.target.elements.step.value);
   const amount = Number(event.target.elements.amount.value);
-
   try {
     for (let i = 1; i <= amount; i++) {
-      const { delay: promiseDelay } = await createPromise(i,delay + step * (i - 1));
+      const { delay: promiseDelay } = await createPromise(
+        i,
+        delay + step * (i - 1)
+      );
       console.log(`Fulfilled promise ${i} in ${promiseDelay}ms`);
       Notiflix.Notify.success(`Fulfilled promise ${i} in ${promiseDelay}ms`);
     }
